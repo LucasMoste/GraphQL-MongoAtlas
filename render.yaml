@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: productos-ventas-api
+    env: node
+    region: oregon  # Cambia a "frankfurt" si prefieres Europa
+    plan: free      # Cambia a "starter" para producción 24/7
+
+    # ─────────────────────────────────────────────
+    #  Configuración de build y start
+    # ─────────────────────────────────────────────
+    buildCommand: npm install
+    startCommand: npm start
+
+    # ─────────────────────────────────────────────
+    #  Variables de entorno en Render
+    #  (Las credenciales reales se configuran en el
+    #   dashboard de Render, NO aquí)
+    # ─────────────────────────────────────────────
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false   # Se carga manualmente desde el dashboard de Render
+
+    # ─────────────────────────────────────────────
+    #  Health check (Render reinicia si falla)
+    # ─────────────────────────────────────────────
+    healthCheckPath: /
